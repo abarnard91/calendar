@@ -6,18 +6,25 @@ body {
 #background, #footer {
   background-color: lavender;
   height: 93vh;
-  width: 95vw;
+  width: 800px;
   text-align: center;
   border: 1px solid red;
-  
+  }
 #background {
   display: flex;
   flex-direction: column;
 }
+
+#Month_year{
+  font-size: xx-large;
+  
+}
+
 #date_boxes{
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   justify-content:center;
+  
 }
 .Day{
   border: 1px solid red;
@@ -26,6 +33,6 @@ body {
 }
 #footer{
   height: 2%;
-  font-size: x-small;
+  font-size: xx-small;
   
 }
