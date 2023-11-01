@@ -25,6 +25,8 @@ const months=[
   
 const currentDate= new Date();
 const dateBoxContainer=document.getElementById("date_boxes")
+const firstDayDate= new Date(`${(currentDate.getMonth()+1)}-${(currentDate.getDate())-(currentDate.getDate()-1)}-${currentDate.getFullYear()}`)
+const firstDay= firstDayDate.getDay();
 
 for (let i=0; i<=months.length; i++){
 	console.log("in the i for loop"+i)
@@ -40,7 +42,7 @@ for (let i=0; i<=months.length; i++){
    	 		dateBox.className="Day";
         dateBoxContainer.appendChild(dateBox)
         if(j<31){
-        	dateBox.textContent=j+1;
+        	dateBox.textContent=(j-firstDay)+1;
         }
     
     	}
@@ -51,8 +53,8 @@ for (let i=0; i<=months.length; i++){
     		let dateBox =document.createElement("div");
    	 		dateBox.className="Day";
         dateBoxContainer.appendChild(dateBox)
-        if(j<30){
-        	dateBox.textContent=j+1;
+        if(j<(30+firstDay) && j>=firstDay){
+        	dateBox.textContent=(j-firstDay)+1;
         }
   }
 }
