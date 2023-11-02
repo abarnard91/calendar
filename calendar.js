@@ -58,7 +58,6 @@ for (let i=0; i<=months.length; i++){//for loop to match i to current month
 
 function makeCalendar(numberOfDays, numberOfBoxes){
 	for (let j=0; j<=numberOfBoxes; j++){//for loop to start creating date boxes 
-    console.log("in the j for loop")
     let dateBox =document.createElement("div");
     dateBox.className="Day";
     dateBoxContainer.appendChild(dateBox)
@@ -72,3 +71,23 @@ function makeCalendar(numberOfDays, numberOfBoxes){
   }
 
 }
+
+//meals
+let crockPotMeals=[
+	'BBQ ribs',
+  'Pulled Pork',
+  'Pulled Chicken',
+  'Salsa Chicken',
+  'Meatball Subs',
+  'Tortellini Soup',
+  'Chicken Dumpling Soup',
+  'Chili Mac',
+];
+let mexicanMeals=[
+'Chicken Tacos',
+'Beef Tacos',
+'Turkey Tacos',
+'Chicken Enchiladas',
+'Chicken Quesadillas',
+
+]
