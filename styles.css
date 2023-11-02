@@ -2,7 +2,8 @@ body {
   background-color: tan;
   display: flex;
   flex-flow: column;
-  font-family: FreeMono, monospace
+  font-family: FreeMono, monospace;
+  align-items: center;
 }
 #background, #footer {
   background-color: lavender;
