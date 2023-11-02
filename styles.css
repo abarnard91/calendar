@@ -34,7 +34,7 @@ body {
   justify-content: center;
   
 }
-.Day{
+.Day, .current{
   border: 1px solid black;
   width: 12.5vw;
   height: 12.2vh;
@@ -45,4 +45,9 @@ body {
   height: 5vh;
   font-size: xx-small;
   
+}
+
+.current{
+  background-color: Thistle;
+  font-weight: bolder;
 }
