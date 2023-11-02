@@ -32,54 +32,43 @@ let boxNumber=0 //creates box number variable
 if (firstDay== 6){boxNumber=41}//decides if calendar will be a 5x7 grid or 6x7 based on if 1st of month is Saturday or not 
 else{boxNumber=34}//if not saturday number of date boxes will be 35 or a 5x7 grid
 for (let i=0; i<=months.length; i++){//for loop to match i to current month 
-	console.log("in the i for loop"+i)
-  console.log(currentDate.getMonth())
+	//console.log("in the i for loop"+i) //for debugging
+  //console.log(currentDate.getMonth()) //for debugging
   //if(6==i){  //For Debugging testing
 	if(currentDate.getMonth()==i){
   	document.getElementById("Month_year").textContent=`${months[i]} ${currentDate.getFullYear()}`;//adds current month and year to the top of the calendar
   	console.log(months[i])
   	if(i==0||i==2||i==4||i==6||i==7||i==9||i==11){//checks if current month is a 31 day month
-    	for (let j=0; j<=boxNumber; j++){//for loop to start creating date boxes 
-      	console.log("in the j for loop")
-    		let dateBox =document.createElement("div");
-   	 		dateBox.className="Day";
-        dateBoxContainer.appendChild(dateBox)
-        if((j<31+firstDay) && j>=firstDay){//checks if value of j + the numerical value of the day of the week ie 0=Sun 3=Wed etc and starts adding the value of j to the box 
-        	dateBox.textContent=(j-firstDay)+1;//increments j while subtracting the previously added value of the first day so the first number to be added to a box is always 1
-        }
-    
-    	}
+    	makeCalendar(31, boxNumber);
+    	
     }
     if(i==3||i==5||i==8||i==10){//same idea as above but for months with 30 days
-    	for (let j=0; j<=boxNumber; j++){
-      	console.log("in the j for loop")
-    		let dateBox =document.createElement("div");
-   	 		dateBox.className="Day";
-        dateBoxContainer.appendChild(dateBox)
-        if(j<(30+firstDay) && j>=firstDay){
-        	dateBox.textContent=(j-firstDay)+1;
-        }
-  }
-}
-		if(i==1){// same idea as above but for February 
-    	for (let j=0; j<=34; j++){
-      	console.log("in the j for loop")
-    		let dateBox =document.createElement("div");
-   	 		dateBox.className="Day";
-        dateBoxContainer.appendChild(dateBox);
-        //if(4%4==0){
-        if(currentDate.getFullYear()%4==0){//checking for leap years to add the 29th day
-        	if((j<29+firstDay) && j>=firstDay){
-        	dateBox.textContent=(j-firstDay)+1;
-        	}
-        }
-        else {
-          if((j<28+firstDay) && j>=firstDay){
-        		dateBox.textContent=(j-firstDay)+1;
-        	}
-        }
+    	makeCalendar(30, boxNumber);
+		}
+		if(i==1){// same idea as above but for February
+      if(currentDate.getFullYear()%4==0){//checking for leap years to add the 29th day
+        makeCalendar(29, 34)        	
       }
-      
+      else {
+        makeCalendar(28, 34)
+      } 
     }
   } 
+}
+
+function makeCalendar(numberOfDays, numberOfBoxes){
+	for (let j=0; j<=numberOfBoxes; j++){//for loop to start creating date boxes 
+    console.log("in the j for loop")
+    let dateBox =document.createElement("div");
+    dateBox.className="Day";
+    dateBoxContainer.appendChild(dateBox)
+    if(j<(numberOfDays+firstDay) && j>=firstDay){//checks if value of j + the numerical value of the day of the week ie 0=Sun 3=Wed etc and starts adding the value of j to the box 
+      dateBox.textContent=(j-firstDay)+1;//increments j while subtracting the previously added value of the first day so the first number to be added to a box is always 1
+      dateBox.id=`${(j-firstDay)+1}` //assigns id == to textContent to node
+    }
+    if (dateBox.id == currentDate.getDate()){//checks if current date number == to the assigned ID and adds 'current' class to it so it has extra css to stand out
+      dateBox.className="current";
+    } 
+  }
+
 }
