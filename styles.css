@@ -2,53 +2,42 @@ body {
   background-color: tan;
   display: flex;
   flex-flow: column;
-  font-family: FreeMono, monospace;
-  align-items: center;
 }
 #background, #footer {
   background-color: lavender;
   height: 93vh;
-  width: 95vw;
+  width: 800px;
   text-align: center;
-  justify-content: center;
-  /*border: 1px solid red;*/
+  border: 1px solid red;
   }
 #background {
   display: flex;
   flex-direction: column;
 }
 
+#buttonRow{
+  display: flex;
+  flex-flow: row nowrap;
+}
+
 #Month_year{
   font-size: xx-large;
-  height: 8vh;
-  align-items: center;
-  
-}
-.weekday{
-  width: 12.5vw;
-  border: 1px solid black;
-  
-}
-#date_boxes, #weekdays{
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  
-}
-.Day, .current{
-  border: 1px solid black;
-  width: 12.5vw;
-  height: 12.2vh;
-  text-align: left;
-  text-indent: 5px;
-}
-#footer{
-  height: 5vh;
-  font-size: xx-small;
   
 }
 
-.current{
-  background-color: Thistle;
-  font-weight: bolder;
+#date_boxes{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content:center;
+  
+}
+.Day{
+  border: 1px solid red;
+  width: 100px;
+  height: 100px;
+}
+#footer{
+  height: 2%;
+  font-size: xx-small;
+  
 }
