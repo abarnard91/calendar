@@ -2,42 +2,60 @@ body {
   background-color: tan;
   display: flex;
   flex-flow: column;
+  font-family: FreeMono, monospace;
+  align-items: center;
 }
 #background, #footer {
   background-color: lavender;
   height: 93vh;
-  width: 800px;
+  width: 95vw;
   text-align: center;
-  border: 1px solid red;
+  justify-content: center;
+  /* border: 1px solid red; */
   }
 #background {
   display: flex;
   flex-direction: column;
 }
-
 #buttonRow{
   display: flex;
-  flex-flow: row nowrap;
+  flex-direction: row;
+  justify-content: space-around;
+  /* border: 1px solid red; */
+  padding-bottom: 5vh;
 }
+
 
 #Month_year{
   font-size: xx-large;
+  height: 8vh;
+  align-items: center;
   
 }
-
-#date_boxes{
+.weekday{
+  width: 12.5vw;
+  border: 1px solid black;
+  
+}
+#date_boxes, #weekdays{
   display: flex;
   flex-flow: row wrap;
-  justify-content:center;
+  justify-content: center;
   
 }
-.Day{
-  border: 1px solid red;
-  width: 100px;
-  height: 100px;
+.Day, .current{
+  border: 1px solid black;
+  width: 12.5vw;
+  height: 12.2vh;
+  text-align: left;
+  text-indent: 5px;
 }
 #footer{
-  height: 2%;
+  height: 5vh;
   font-size: xx-small;
   
+}
+.current{
+  background-color: Thistle;
+  font-weight: bolder;
 }
