@@ -55,21 +55,26 @@ for (let i=0; i<=months.length; i++){//for loop to match i to current month
     }
   } 
 }
-
 function makeCalendar(numberOfDays, numberOfBoxes){
 	for (let j=0; j<=numberOfBoxes; j++){//for loop to start creating date boxes 
+  
+  
     let dateBox =document.createElement("div");
     dateBox.className="Day";
     dateBoxContainer.appendChild(dateBox)
+    
+    
+    
     if(j<(numberOfDays+firstDay) && j>=firstDay){//checks if value of j + the numerical value of the day of the week ie 0=Sun 3=Wed etc and starts adding the value of j to the box 
       dateBox.textContent=(j-firstDay)+1;//increments j while subtracting the previously added value of the first day so the first number to be added to a box is always 1
       dateBox.id=`${(j-firstDay)+1}` //assigns id == to textContent to node
     }
     if (dateBox.id == currentDate.getDate()){//checks if current date number == to the assigned ID and adds 'current' class to it so it has extra css to stand out
       dateBox.className="current";
+      
+      
     } 
   }
-
 }
 
 //meals
@@ -90,4 +95,29 @@ let mexicanMeals=[
 'Chicken Enchiladas',
 'Chicken Quesadillas',
 
-]
+];
+
+const currentDay=document.getElementsByClassName("current")
+
+function randomMeal(mealsOne,mealsTwo) {
+	combinedMeals=mealsOne.concat(mealsTwo);
+  randomNum=Math.floor(Math.random()*combinedMeals.length);
+  let meal= combinedMeals[randomNum];
+  let mealBox= document.createElement("div");
+  mealBox.className="meal";
+  mealBox.textContent= meal;
+  currentDay.appendChild(mealBox);
+  alert(meal)
+  return meal;
+  
+}
+
+
+
+const dayButton = document.getElementById("oneDayMeal");
+const weekButton = document.getElementById("oneWeekMeals");
+const monthButton = document.getElementById("oneMonthMeals");
+
+dayButton.onclick= ()=>{randomMeal(crockPotMeals, mexicanMeals);}
+weekButton.onclick = () => alert("oof");
+monthButton.onclick = () => alert('stop that!')
