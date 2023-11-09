@@ -30,6 +30,7 @@ const months=[
   ];
   
 const currentDate= new Date();//calling new date object 
+//const currentDate= new Date('2/3/2025') //for debugging months
 const dateBoxContainer=document.getElementById("date_boxes") //parent node to add date boxes to
 const firstDayDate= new Date(`${(currentDate.getMonth()+1)}-${(currentDate.getDate())-(currentDate.getDate()-1)}-${currentDate.getFullYear()}`) //creates a new date object using previous date object to establish the first day of the month
 const firstDay= firstDayDate.getDay(); //assigns first day of month to week day ie 11/1/23== Wednesday
@@ -45,28 +46,20 @@ for (let i=0; i<=months.length; i++){//for loop to match i to current month
   	console.log(months[i])
   	if(i==0||i==2||i==4||i==6||i==7||i==9||i==11){//checks if current month is a 31 day month
     	makeCalendar(31, boxNumber);
-      buttonClicks();
-      monthButton.onclick = () => {randomMeal(crockPotMeals, mexicanMeals, (32-currentDate.getDate()));}
-      clearButton.onclick = ()=>{clearMeals((32-currentDate.getDate()))}
+      buttonClicks((32-currentDate.getDate()));
     }
     if(i==3||i==5||i==8||i==10){//same idea as above but for months with 30 days
     	makeCalendar(30, boxNumber);
-      buttonClicks();
-      monthButton.onclick = () => {randomMeal(crockPotMeals, mexicanMeals, (31-currentDate.getDate()));}
-      clearButton.onclick = ()=>{clearMeals((31-currentDate.getDate()))}
+      buttonClicks((31-currentDate.getDate()));
 		}
 		if(i==1){// same idea as above but for February
       if(currentDate.getFullYear()%4==0){//checking for leap years to add the 29th day
         makeCalendar(29, 34);
-        buttonClicks();
-        monthButton.onclick = () => {randomMeal(crockPotMeals, mexicanMeals, (30-currentDate.getDate()));}
-        clearButton.onclick = ()=>{clearMeals((30-currentDate.getDate()))}
+        buttonClicks((30-currentDate.getDate()));
       }
       else {
         makeCalendar(28, 34);
-        buttonClicks();
-        monthButton.onclick = ()=>{randomMeal(crockPotMeals, mexicanMeals, (29-currentDate.getDate()));}
-        clearButton.onclick = ()=>{clearMeals((29-currentDate.getDate()))}
+        buttonClicks((29-currentDate.getDate()));
       } 
     }
   } 
@@ -101,6 +94,8 @@ let crockPotMeals=[
   'Tortellini Soup',
   'Chicken Dumpling Soup',
   'Chili Mac',
+  'Cheese Ale soup',
+  
 ];
 let mexicanMeals=[
 'Chicken Tacos',
@@ -111,15 +106,42 @@ let mexicanMeals=[
 
 ];
 
-function randomMeal(mealsOne,mealsTwo,numOfDays) {
-  combinedMeals=mealsOne.concat(mealsTwo); //combines the meal arrays into 1
-  for (let k=0;k<numOfDays;k++){ //uses a for loop to add a meal to each day after the current day based on what's entered in num of days value
+let italianMeals=[
+"Tortellini",
+"Baked Mastaccioli",
+"Raviolis",
+"Chicken Parmesean",
+
+];
+let chineseMeals=[
+"Japanese Fried Rice",
+"Orange Chicken",
+"Potstickers and fried rice",
+
+];
+
+let grillMeals=[
+"Burgers",
+"Brats",
+"Porkchops",
+"BBQ Chicken",
+"Steak",
+
+];
+let eatOutMeals=[ 
+'Order Out'
+];
+
+function randomMeal(mealsOne,mealsTwo,MealsThree, MealsFour,MealsFive, MealsSix,numOfDays) {
+  combinedMeals=mealsOne.concat(mealsTwo, MealsThree, MealsFour, MealsFive, MealsSix); //combines the meal arrays into 1
+  for (let k=0; k<numOfDays; k++){ //uses a for loop to add a meal to each day after the current day based on what's entered in num of days value
   	randomNum=Math.floor(Math.random()*combinedMeals.length);//creates a random number in the length of the combined meal array
   	let meal= combinedMeals[randomNum];//meal is picked from the array by the random number
+    combinedMeals.splice(randomNum, 1)
   	let currentDay = document.getElementById(`${currentDate.getDate()+k}`);//current date id node is attached to current day
-    if (currentDay.childNodes.length>1){//used to remove a meal if already added to the calendar
-        currentDay.childNodes[1].remove();
-      }
+    if (currentDay.childNodes.length>1){
+    	currentDay.childNodes[1].remove();//used to remove a meal if already added to the calendar	
+    }
     let mealBox= document.createElement("div");//creates a div to put the random meal into the calendar box
     mealBox.className="meal";// class added for css stylings
     mealBox.textContent= meal;//adds meal to the div
@@ -135,7 +157,9 @@ function clearMeals(numOfDays){for (let k=0;k<numOfDays;k++){// does the first p
   	}
    }
 
-function buttonClicks(){//function to contain button functions for predetermined numbers
-  dayButton.onclick= ()=>{randomMeal(crockPotMeals, mexicanMeals, 1);}
-  weekButton.onclick = () => {randomMeal(crockPotMeals, mexicanMeals, 7);}
+function buttonClicks(leftInMonth){//function to contain button functions for predetermined numbers, or left in month which is the days in the month - the current date value which equates to numOfDays in the clearMeals and randomMeals functions
+  dayButton.onclick= ()=>{randomMeal(crockPotMeals, mexicanMeals,italianMeals, chineseMeals, grillMeals, eatOutMeals, 1);}
+  weekButton.onclick = () => {randomMeal(crockPotMeals, mexicanMeals,italianMeals, chineseMeals, grillMeals, eatOutMeals, 7);}
+  monthButton.onclick = ()=>{randomMeal(crockPotMeals, mexicanMeals,italianMeals, chineseMeals, grillMeals, eatOutMeals, leftInMonth);}
+  clearButton.onclick = ()=>{clearMeals(leftInMonth)}
  }
