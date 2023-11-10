@@ -28,6 +28,7 @@ body {
 button{
   width: 23vw;
   height 1vh;
+  font-weight:600;
 }
 
 #Month_year{
@@ -39,6 +40,7 @@ button{
 .weekday{
   width: 12.5vw;
   border: 1px solid black;
+  flex-grow:1;
   
 }
 #date_boxes, #weekdays{
@@ -51,7 +53,7 @@ button{
 .meal{
     text-align: center;
     text-indent: 0px;
-    font-weight: bolder;
+    font-weight: 700;
 }
 
 .Day, .current{
@@ -60,7 +62,14 @@ button{
   height: 12.2vh;
   text-align: left;
   text-indent: 5px;
+  flex-grow:1;
 }
+.Day:hover,.current:Hover{
+  transform:scale(1.2);
+  background-color:lavender;
+  font-weight:900;
+}
+
 #footer{
   height: 5vh;
   font-size: xx-small;
@@ -68,5 +77,8 @@ button{
 }
 .current{
   background-color: Thistle;
-  font-weight: bolder;
+  font-weight: 700;
+}
+.current:hover{
+  background-color:Thistle;
 }
