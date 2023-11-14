@@ -127,40 +127,39 @@ let eatOutMeals=[
 'Order Out'
 ];
 
-let dateValue= currentDate.getDate();
+var dateValue= currentDate.getDate();
+
 function randomMeal(mealsOne,mealsTwo,MealsThree, MealsFour,MealsFive, MealsSix,numOfDays) {
+	console.log(`date value at beginning of randomMeal is ${dateValue}`)
   combinedMeals=mealsOne.concat(mealsTwo, MealsThree, MealsFour, MealsFive, MealsSix); //combines the meal arrays into 1
   for (let k=0; k<numOfDays; k++){ //uses a for loop to add a meal to each day after the current day based on what's entered in num of days value
   	
-  	randomNum=Math.floor(Math.random()*combinedMeals.length);//creates a random number in the length of the combined meal array
+  	let randomNum=Math.floor(Math.random()*combinedMeals.length);//creates a random number in the length of the combined meal array
   	let meal= combinedMeals[randomNum];//meal is picked from the array by the random number
     combinedMeals.splice(randomNum, 1)
     
-  	let currentDay = document.getElementById(`${dateValue+k}`);//current date id node is attached to current day
-    if (currentDay.childNodes.length>1){
+  	var currentDay = document.getElementById(`${dateValue+k}`);//current date id node is attached to current day
+    if (document.getElementById(`${dateValue-numOfDays}`).childNodes.length>1){
     	if(confirm("Sounds good?")){
-      	//if(numOfDays==1){
-        	dateValue+=numOfDays;
-          currentDay = document.getElementById(`${dateValue+k}`);
-        //}
-        //if(numOfDays==7){
-        	//dateValue+=numOfDays;
-          //currentDay = document.getElementById(`${dateValue+k}`);
-          
-        //}
-      }
-    	else {currentDay.childNodes[1].remove();}//used to remove a meal if already added to the calendar	
+  				//if ((numOfDays===7 )){
+          	//dateValue+=1;
+            //currentDay = document.getElementById(`${dateValue+k}`);
+          //}
+          //else{
+        		//dateValue+=numOfDays;
+          	currentDay = document.getElementById(`${dateValue+k}`);
+            
+       		//}
+      	}
+    	else {document.getElementById(`${dateValue-numOfDays}`).childNodes[1].remove(); dateValue-=1 }//used to remove a meal if already added to the calendar	
       }
     let mealBox= document.createElement("div");//creates a div to put the random meal into the calendar box
     mealBox.className="meal";// class added for css stylings
     mealBox.textContent= meal;//adds meal to the div
     currentDay.appendChild(mealBox);// adds div into the box
   }
-  if (currentDay.childNodes.length>1){
-    	if(confirm("Sounds good?")){
-      	//if(numOfDays==1){
-        	dateValue+=numOfDays;}}
-  else {currentDay.childNodes[1].remove();}
+	console.log(`date value is ${dateValue}`)
+  dateValue+=numOfDays;
   return dateValue
 }
 
@@ -175,10 +174,8 @@ function clearMeals(numOfDays){for (let k=0;k<numOfDays;k++){// does the first p
    }
 
 function buttonClicks(leftInMonth){//function to contain button functions for predetermined numbers, or left in month which is the days in the month - the current date value which equates to numOfDays in the clearMeals and randomMeals functions
-  dayButton.onclick= ()=>{randomMeal(crockPotMeals, mexicanMeals,italianMeals, chineseMeals, grillMeals, eatOutMeals, 1);}
-  weekButton.onclick = () => {randomMeal(crockPotMeals, mexicanMeals,italianMeals, chineseMeals, grillMeals, eatOutMeals, 7);}
+  dayButton.onclick= ()=>{randomMeal(crockPotMeals, mexicanMeals,italianMeals, chineseMeals, grillMeals, eatOutMeals, 1); }
+  weekButton.onclick = () => {randomMeal(crockPotMeals, mexicanMeals,italianMeals, chineseMeals, grillMeals, eatOutMeals, 7); }
   monthButton.onclick = ()=>{randomMeal(crockPotMeals, mexicanMeals,italianMeals, chineseMeals, grillMeals, eatOutMeals, leftInMonth);}
   clearButton.onclick = ()=>{clearMeals(leftInMonth)}
  }
- 
- 
