@@ -25,6 +25,89 @@ body {
   padding-bottom: 2vh;
 }
 
+button, #currentMealDay{
+  width: 23vw;
+  height 1vh;
+  font-weight:600;
+}
+
+#Month_year{
+  font-size: xx-large;
+  height: 8vh;
+  align-items: center;
+  
+}
+.weekday{
+  width: 12.5vw;
+  border: 1px solid black;
+  flex-grow:1;
+  
+}
+#date_boxes, #weekdays{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  
+}
+
+.meal{
+    text-align: center;
+    text-indent: 0px;
+    font-weight: 700;
+}
+
+.Day, .current{
+  border: 1px solid black;
+  width: 12.5vw;
+  height: 12.2vh;
+  text-align: left;
+  text-indent: 5px;
+  flex-grow:1;
+}
+.Day:hover,.current:Hover{
+  transform:scale(1.2);
+  background-color:lavender;
+  font-weight:900;
+}
+
+#footer{
+  height: 5vh;
+  font-size: xx-small;
+  
+}
+.current{
+  background-color: Thistle;
+  font-weight: 700;
+}
+.current:hover{
+  background-color:Thistle;
+}body {
+  background-color: tan;
+  display: flex;
+  flex-flow: column;
+  font-family: FreeMono, monospace;
+  align-items: center;
+}
+#background, #footer {
+  background-color: lavender;
+  height: 93vh;
+  width: 95vw;
+  text-align: center;
+  justify-content: center;
+  /* border: 1px solid red; */
+  }
+#background {
+  display: flex;
+  flex-direction: column;
+}
+#buttonRow, #buttonRow2{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  /* border: 1px solid red; */
+  padding-bottom: 2vh;
+}
+
 button{
   width: 23vw;
   height 1vh;
