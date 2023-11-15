@@ -1,7 +1,9 @@
 const dayButton = document.getElementById("oneDayMeal");
 const weekButton = document.getElementById("oneWeekMeals");
 const monthButton = document.getElementById("oneMonthMeals");
+const confirmButton = document.getElementById("confirmButton");
 const clearButton = document.getElementById("clearButton");
+const currentMealDayDiv = document.getElementById("currentMealDay");
 
 //arrays for days and months
 const days=[
@@ -129,9 +131,11 @@ let eatOutMeals=[
 
 var dateValue= currentDate.getDate();
 
+currentMealDayDiv.textContent=`The Date to confirm a meal is ${dateValue}`;
+
+
 function randomMeal(mealsOne,mealsTwo,MealsThree, MealsFour,MealsFive, MealsSix,numOfDays) {
-	console.log(`date value at beginning of randomMeal is ${dateValue}`)
-  combinedMeals=mealsOne.concat(mealsTwo, MealsThree, MealsFour, MealsFive, MealsSix); //combines the meal arrays into 1
+ let combinedMeals=mealsOne.concat(mealsTwo, MealsThree, MealsFour, MealsFive, MealsSix); //combines the meal arrays into 1
   for (let k=0; k<numOfDays; k++){ //uses a for loop to add a meal to each day after the current day based on what's entered in num of days value
   	
   	let randomNum=Math.floor(Math.random()*combinedMeals.length);//creates a random number in the length of the combined meal array
@@ -139,28 +143,16 @@ function randomMeal(mealsOne,mealsTwo,MealsThree, MealsFour,MealsFive, MealsSix,
     combinedMeals.splice(randomNum, 1)
     
   	var currentDay = document.getElementById(`${dateValue+k}`);//current date id node is attached to current day
-    if (document.getElementById(`${dateValue-numOfDays}`).childNodes.length>1){
-    	if(confirm("Sounds good?")){
-  				//if ((numOfDays===7 )){
-          	//dateValue+=1;
-            //currentDay = document.getElementById(`${dateValue+k}`);
-          //}
-          //else{
-        		//dateValue+=numOfDays;
-          	currentDay = document.getElementById(`${dateValue+k}`);
-            
-       		//}
-      	}
-    	else {document.getElementById(`${dateValue-numOfDays}`).childNodes[1].remove(); dateValue-=1 }//used to remove a meal if already added to the calendar	
-      }
+    if (currentDay.childNodes.length>1){
+        currentDay.childNodes[1].remove();
+    	}
+    
     let mealBox= document.createElement("div");//creates a div to put the random meal into the calendar box
     mealBox.className="meal";// class added for css stylings
     mealBox.textContent= meal;//adds meal to the div
     currentDay.appendChild(mealBox);// adds div into the box
   }
-	console.log(`date value is ${dateValue}`)
-  dateValue+=numOfDays;
-  return dateValue
+  
 }
 
 function clearMeals(numOfDays){for (let k=0;k<numOfDays;k++){// does the first part of the function above removing the mealbox div from the current day and every day after based on numOfDays value
@@ -170,12 +162,31 @@ function clearMeals(numOfDays){for (let k=0;k<numOfDays;k++){// does the first p
       }
   	}
     dateValue=currentDate.getDate();
+    currentMealDayDiv.textContent=`The Date to confirm a meal is ${dateValue}`;
     return dateValue;
    }
+   
+function confirmMeals(){
+	if (document.getElementById(`${dateValue}`).childNodes.length>1){
+  	if(confirm("Sounds good?")){
+    	alert("Okie Dokie Moving on")
+      dateValue++;
+			currentMealDayDiv.textContent=`The Date to confirm a meal is ${dateValue}`;      
+      console.log(dateValue)
+      return dateValue	
+      }
+    else{randomMeal(crockPotMeals, mexicanMeals,italianMeals, chineseMeals, grillMeals, eatOutMeals, 1);
+    
+    }
+  }
+  else {alert("You've got nothing to confirm ya Kanigit!")
+  }//used to remove a meal if already added to the calendar	 
+}
 
 function buttonClicks(leftInMonth){//function to contain button functions for predetermined numbers, or left in month which is the days in the month - the current date value which equates to numOfDays in the clearMeals and randomMeals functions
   dayButton.onclick= ()=>{randomMeal(crockPotMeals, mexicanMeals,italianMeals, chineseMeals, grillMeals, eatOutMeals, 1); }
   weekButton.onclick = () => {randomMeal(crockPotMeals, mexicanMeals,italianMeals, chineseMeals, grillMeals, eatOutMeals, 7); }
   monthButton.onclick = ()=>{randomMeal(crockPotMeals, mexicanMeals,italianMeals, chineseMeals, grillMeals, eatOutMeals, leftInMonth);}
   clearButton.onclick = ()=>{clearMeals(leftInMonth)}
+  confirmButton.onclick = ()=>{confirmMeals()}
  }
