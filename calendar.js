@@ -190,3 +190,10 @@ function buttonClicks(leftInMonth){//function to contain button functions for pr
   clearButton.onclick = ()=>{clearMeals(leftInMonth)}
   confirmButton.onclick = ()=>{confirmMeals()}
  }
+ 
+ document.getElementsByClassName("Day").onclick =()=>{
+ 		let mealBox= document.createElement("div");//creates a div to put the random meal into the calendar box
+    mealBox.className="meal";// class added for css stylings
+    mealBox.textContent= meal;//adds meal to the div
+    currentDay.appendChild(mealBox);// adds div into the box 
+    }
