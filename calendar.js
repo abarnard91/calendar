@@ -77,7 +77,14 @@ function makeCalendar(numberOfDays, numberOfBoxes){
     }
     if (dateBox.id == currentDate.getDate()){//checks if current date number == to the assigned ID and adds 'current' class to it so it has extra css to stand out
       dateBox.className="current"; 
-    } 
+    }
+    dateBox.onclick=()=>{
+    let mealBox= document.createElement("TEXTAREA");//creates a div to put the random meal into the calendar box
+    mealBox.rows="4";
+    mealBox.cols="25";
+    mealBox.id=`meal${j}`;
+    dateBox.appendChild(mealBox);
+    }
   }
 }
 
@@ -191,9 +198,16 @@ function buttonClicks(leftInMonth){//function to contain button functions for pr
   confirmButton.onclick = ()=>{confirmMeals()}
  }
  
- document.getElementsByClassName("Day").onclick =()=>{
- 		let mealBox= document.createElement("div");//creates a div to put the random meal into the calendar box
-    mealBox.className="meal";// class added for css stylings
-    mealBox.textContent= meal;//adds meal to the div
-    currentDay.appendChild(mealBox);// adds div into the box 
-    }
+//   var clickBox=document.getElementsByClassName("Day");
+//   for (let x=0; 0<=clickBox.length;x++){
+//   clickBox[4].onclick =()=>{
+//     alert("POOOOOOP")
+//  		let mealBox= document.createElement("TEXTAREA");//creates a div to put the random meal into the calendar box
+//     mealBox.rows="4";
+//     mealBox.cols="10";
+//     mealBox.className="meal";// class added for css stylings
+//     //mealBox.textContent= meal;//adds meal to the div
+//     clickBox[4].appendChild(mealBox);// adds div into the box 
+//     }
+
+//  }
