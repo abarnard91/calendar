@@ -32,12 +32,12 @@ const months=[
   ];
   
 const currentDate= new Date();//calling new date object 
-//const currentDate= new Date('2/3/2025') //for debugging months
+//const currentDate= new Date('11/3/2025') //for debugging months
 const dateBoxContainer=document.getElementById("date_boxes") //parent node to add date boxes to
 const firstDayDate= new Date(`${(currentDate.getMonth()+1)}-${(currentDate.getDate())-(currentDate.getDate()-1)}-${currentDate.getFullYear()}`) //creates a new date object using previous date object to establish the first day of the month
 const firstDay= firstDayDate.getDay(); //assigns first day of month to week day ie 11/1/23== Wednesday
 let boxNumber=0 //creates box number variable
-if (firstDay== 6){boxNumber=41}//decides if calendar will be a 5x7 grid or 6x7 based on if 1st of month is Saturday or not 
+if (firstDay == 6 || firstDay == 5){boxNumber=41}//decides if calendar will be a 5x7 grid or 6x7 based on if 1st of month is Saturday or not 
 else{boxNumber=34}//if not saturday number of date boxes will be 35 or a 5x7 grid
 for (let i=0; i<=months.length; i++){//for loop to match i to current month 
 	//console.log("in the i for loop"+i) //for debugging
@@ -79,11 +79,15 @@ function makeCalendar(numberOfDays, numberOfBoxes){
       dateBox.className="current"; 
     }
     dateBox.onclick=()=>{
-    let mealBox= document.createElement("TEXTAREA");//creates a div to put the random meal into the calendar box
-    mealBox.rows="4";
-    mealBox.cols="25";
-    mealBox.id=`meal${j}`;
-    dateBox.appendChild(mealBox);
+    if(dateBox.childNodes.length>1){}//if there is a textarea element in the datebox the click does nothing
+    else{
+      let mealBox= document.createElement("TEXTAREA");//creates a div to put the random meal into the calendar box
+      mealBox.rows="4";
+      mealBox.cols="25";
+      mealBox.id=`meal${j}`;
+      dateBox.appendChild(mealBox);
+      mealBox.focus();//puts the curser in the text box
+      }
     }
   }
 }
@@ -162,8 +166,9 @@ function randomMeal(mealsOne,mealsTwo,MealsThree, MealsFour,MealsFive, MealsSix,
   
 }
 
-function clearMeals(numOfDays){for (let k=0;k<numOfDays;k++){// does the first part of the function above removing the mealbox div from the current day and every day after based on numOfDays value
+function clearMeals(numOfDays){for (let k=0;k<(numOfDays);k++){// does the first part of the function above removing the mealbox div from the current day and every day after based on numOfDays value
   	let currentDay = document.getElementById(`${currentDate.getDate()+k}`);
+    //console.log(`k is ${k} currentDay value is ${currentDay} and child node length is ${currentDay.childNodes.length}`) //for debugging
     if (currentDay.childNodes.length>1){
         currentDay.childNodes[1].remove();
       }
